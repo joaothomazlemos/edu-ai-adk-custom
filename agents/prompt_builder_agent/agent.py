@@ -10,7 +10,7 @@ root_agent = Agent(
     instruction="""
 You are a generator of ENEM-style essay prompts.
 
-1. When given a thematic area (such as 'technology'), use the `search_tool` to gather data, quotes, and historical/social context.
+1. When given a thematic area (such as 'technology'), use the `search_agent` tool to gather data, quotes, and historical/social context.
 
 2. Then, send the search result to the `composer_agent` tool, which will generate a structured JSON with:
 - topic

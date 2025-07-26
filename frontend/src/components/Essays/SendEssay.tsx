@@ -47,7 +47,7 @@ export default function SendEssay() {
       alert("Por favor, insira uma redação ou selecione um arquivo.");
       return;
     }
-
+    
     setIsLoading(true);
 
     try {
@@ -55,8 +55,10 @@ export default function SendEssay() {
 
       if (file) {
         // Se for imagem, simula envio com URL mockada (em vez de upload real por enquanto)
-        const final_text = `The user uploaded an essay as image with the following URL: https://storage.googleapis.com/edu-ai-essays/essay_01.jpg and you need to evaluate it.`;
-        payload = ApiService.createPayload(userId, sessionId, final_text);
+        //const final_text = `The user uploaded an essay as image with the following URL: https://storage.googleapis.com/edu-ai-essays/essay_01.jpg and you need to evaluate it.`;
+        //payload = ApiService.createPayload(userId, sessionId, final_text);
+        payload = await ApiService.createImagePayload(userId, sessionId, file);
+        
       } else {
         // Se for texto direto
         const final_text = `The user uploaded an essay with the title/subject: ${essayMainSubject} and the following text: ${text} and you need to evaluate it.`;
@@ -67,7 +69,7 @@ export default function SendEssay() {
       const parsed = parseADKResponse<EssayEvaluationResult>(data.response);
       if (parsed) {
         setResponse(parsed);
-        /*await ApiService.runAgent(
+        await ApiService.runAgent(
           ApiService.createPayload(
             userId,
             sessionId,
@@ -75,7 +77,7 @@ export default function SendEssay() {
               parsed
             )}`
           )
-        );*/
+        );
       }
     } catch (error) {
       console.error("Erro ao enviar redação:", error);

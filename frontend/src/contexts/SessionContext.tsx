@@ -1,6 +1,7 @@
 "use client";
 
 import { createContext, useContext, useEffect, useState } from "react";
+import { v4 as uuidv4 } from 'uuid';
 import { ApiService } from "@/services/api";
 
 type SessionContextType = {
@@ -24,7 +25,7 @@ export function SessionProvider({ children }: { children: React.ReactNode }) {
       // Get or generate userId (persisted)
       let storedUserId = localStorage.getItem("eduai_user_id");
       if (!storedUserId) {
-        storedUserId = crypto.randomUUID();
+        storedUserId = uuidv4();
         localStorage.setItem("eduai_user_id", storedUserId);
       }
 

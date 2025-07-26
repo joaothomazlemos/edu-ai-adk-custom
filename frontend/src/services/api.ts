@@ -1,6 +1,6 @@
 import { RunPayload } from "@/types";
 
-const BASE_API_URL = "https://edu-ai-adk-659561392335.europe-west1.run.app";
+const BASE_API_URL = "http://localhost:8080";
 const APP_NAME = "orchestrator_agent";
 
 export class ApiService {
@@ -46,13 +46,19 @@ export class ApiService {
       }
 
       const data = await response.json();
-      console.log("🔄 Response from API:", data);
+      
+      // ADD THIS DEBUG CODE HERE:
+      console.log("🔄 Complete API response structure:", data);
+      console.log("🔄 data.response type:", typeof data.response);
+      console.log("🔄 data.response content:", data.response);
+      
       return data;
     } catch (error) {
       console.error("Error running agent:", error);
       throw error;
     }
   }
+
 
   static createPayload(
     user_id: string | null,
